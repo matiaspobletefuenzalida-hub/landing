@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConectaEdu Pro | Centraliza la Comunicación Escolar</title>
-    <meta name="description" content="La plataforma EdTech SaaS que conecta a directivos, docentes, estudiantes y apoderados en un solo ecosistema digital.">
+    <title>ConectaEdu Pro | La Red Social Educativa Privada</title>
+    <meta name="description" content="Moderniza la comunicación escolar y fortalece la participación estudiantil con el ecosistema digital diseñado para colegios innovadores.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,17 +15,16 @@
     
     <style>
         /* ==========================================================================
-           STYLES - ConectaEdu Landing Page (SaaS Premium)
+           VARIABLES PREMIUM SAAS B2B
            ========================================================================== */
-
-        /* Variables Base */
         :root {
-            --bg-app: #f4f7fb; 
+            --bg-app: #f8fafc; 
             --bg-surface: #ffffff; 
-            --bg-input: #f8fafc;         
+            --bg-glass: rgba(255, 255, 255, 0.7);
             --primary-dark: #0f172a; 
             --primary-brand: #4f46e5; 
             --primary-brand-hover: #4338ca;
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
             --text-main: #334155;          
             --text-muted: #64748b; 
             --text-light: #94a3b8;
@@ -33,11 +32,11 @@
             --danger: #ef4444; 
             --warning: #f59e0b;
             --border-soft: #e2e8f0; 
-            --border-focus: #c7d2fe;
             
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-glow: 0 10px 40px -10px rgba(79, 70, 229, 0.4);
             
             --radius-xl: 24px;
             --radius-lg: 16px; 
@@ -47,241 +46,281 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
 
-        body {
-            font-family: var(--font-main);
-            color: var(--text-main);
-            background-color: var(--bg-surface);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        body { font-family: var(--font-main); color: var(--text-main); background-color: var(--bg-app); line-height: 1.6; overflow-x: hidden; }
 
-        /* Tipografía Compartida */
-        h1, h2, h3, h4 { color: var(--primary-dark); font-weight: 700; line-height: 1.2; }
+        /* Tipografía */
+        h1, h2, h3, h4 { color: var(--primary-dark); font-weight: 700; line-height: 1.2; letter-spacing: -0.5px;}
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
         .text-center { text-align: center; }
 
+        /* Animaciones Globales (Scroll Reveal) */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 0.1s; } .delay-200 { transition-delay: 0.2s; } .delay-300 { transition-delay: 0.3s; }
+
+        /* Keyframes para objetos flotantes */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        @keyframes float-slow { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
         /* Contenedores */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .section { padding: 100px 0; }
-        .bg-light { background-color: var(--bg-app); }
-        .bg-dark { background-color: var(--primary-dark); }
+        .section { padding: 120px 0; }
+        .bg-white { background-color: var(--bg-surface); }
+        .bg-dark { background-color: var(--primary-dark); color: white; }
 
-        /* Botones */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            font-family: var(--font-main); font-weight: 600; font-size: 14px;
-            padding: 12px 28px; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; border: none;
-        }
-        .btn-primary {
-            background: var(--primary-brand); color: white;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
-        }
-        .btn-primary:hover { background: var(--primary-brand-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4); }
-        .btn-outline { background: white; border: 1px solid var(--border-soft); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--border-focus); background: var(--bg-input); }
-        .btn-large { padding: 16px 36px; font-size: 16px; }
-        .btn-full { width: 100%; }
+        /* Botones Premium */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-main); font-weight: 600; font-size: 15px; padding: 14px 32px; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; border: none; }
+        .btn-primary { background: var(--primary-gradient); color: white; box-shadow: var(--shadow-glow); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 45px -10px rgba(79, 70, 229, 0.6); }
+        .btn-outline { background: var(--bg-glass); border: 1px solid var(--border-soft); color: var(--primary-dark); backdrop-filter: blur(10px); }
+        .btn-outline:hover { background: white; border-color: var(--primary-brand); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-large { padding: 18px 40px; font-size: 16px; }
 
-        /* Navbar */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 20px 0; transition: 0.3s; background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px); border-bottom: 1px solid transparent;
-        }
-        .navbar.scrolled { padding: 12px 0; border-bottom: 1px solid var(--border-soft); background: rgba(255, 255, 255, 0.95); }
+        /* Navbar Glassmorphism */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 20px 0; transition: 0.4s; background: transparent; }
+        .navbar.scrolled { padding: 12px 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-soft); box-shadow: var(--shadow-sm); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
-        .brand { display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 800; color: var(--primary-dark); letter-spacing: -0.5px;}
-        .brand i { color: var(--primary-brand); font-size: 28px;}
-        .nav-links { display: flex; gap: 32px; font-weight: 500; font-size: 14px; color: var(--text-muted); }
+        .brand { display: flex; align-items: center; gap: 8px; font-size: 24px; font-weight: 800; color: var(--primary-dark); letter-spacing: -1px;}
+        .brand i { color: var(--primary-brand); font-size: 32px; background: #e0e7ff; padding: 6px; border-radius: 12px;}
+        .nav-links { display: flex; gap: 40px; font-weight: 600; font-size: 14px; color: var(--text-muted); }
         .nav-links a:hover { color: var(--primary-brand); }
-        .nav-actions { display: flex; gap: 12px; }
+        
+        /* Hero Section (Enfocado a Conversión) */
+        .hero { position: relative; padding: 180px 0 120px; overflow: hidden; background: radial-gradient(100% 100% at 50% 0%, #ffffff 0%, #f4f7fb 100%); }
+        .hero-blob { position: absolute; top: -100px; right: -150px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(79,70,229,0.1) 0%, rgba(255,255,255,0) 60%); border-radius: 50%; z-index: 0; animation: float-slow 8s infinite ease-in-out; }
+        .hero-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        
+        .badge-premium { display: inline-flex; align-items: center; gap: 6px; background: white; border: 1px solid var(--border-soft); color: var(--text-main); padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .badge-premium span { background: #fee2e2; color: var(--danger); padding: 2px 8px; border-radius: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .hero h1 { font-size: 58px; margin-bottom: 24px; letter-spacing: -2px; line-height: 1.1; }
+        .hero h1 span { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 19px; color: var(--text-muted); margin-bottom: 40px; max-width: 90%; }
+        
+        .hero-cta-group { display: flex; flex-direction: column; gap: 16px; }
+        .hero-cta-buttons { display: flex; gap: 16px; }
+        .cta-trust { font-size: 13px; color: var(--text-light); font-weight: 500; display: flex; align-items: center; gap: 16px; }
+        .cta-trust i { color: var(--success); font-size: 16px; }
 
-        /* Hero Section */
-        .hero { position: relative; padding: 160px 0 100px; background: var(--bg-surface); overflow: hidden; }
-        .hero-bg-glow {
-            position: absolute; top: -100px; right: -100px; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0;
-        }
-        .hero-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
-        .badge-new { display: inline-block; background: #e0e7ff; color: var(--primary-brand); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 24px; letter-spacing: 1px; }
-        .hero h1 { font-size: 56px; margin-bottom: 24px; letter-spacing: -1.5px; }
-        .hero h1 span { color: var(--primary-brand); }
-        .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; max-width: 90%; }
-        .cta-hint { font-size: 13px !important; margin-top: 16px; color: var(--text-light) !important; font-weight: 500;}
+        /* Mockup Interactivo / Flotante */
+        .hero-visual { position: relative; perspective: 1000px; }
+        .mockup-main { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.8); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding: 24px; transform: rotateY(-5deg) rotateX(5deg); transition: 0.5s; animation: float 6s infinite ease-in-out; }
+        .mockup-main:hover { transform: rotateY(0deg) rotateX(0deg) scale(1.02); }
+        
+        .m-post { background: white; border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm); margin-bottom: 16px; border: 1px solid var(--border-soft); }
+        .m-post-header { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+        .m-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-brand); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .m-avatar.student { background: var(--warning); }
+        .m-line-group { flex: 1; }
+        .m-line { height: 8px; border-radius: 4px; background: var(--border-soft); margin-bottom: 6px; }
+        .m-line.w-40 { width: 40%; } .m-line.w-80 { width: 80%; } .m-line.w-100 { width: 100%; }
+        
+        /* Floating Cards en el Hero */
+        .float-card { position: absolute; background: white; padding: 16px 24px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-soft); display: flex; align-items: center; gap: 16px; z-index: 10; animation: float-slow 5s infinite ease-in-out reverse; }
+        .float-card.top { top: -20px; right: -20px; }
+        .float-card.bottom { bottom: 30px; left: -40px; animation-delay: 1s; }
+        .f-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .f-icon.green { background: #d1fae5; color: var(--success); }
+        .f-icon.indigo { background: #e0e7ff; color: var(--primary-brand); }
+        .f-text h4 { font-size: 20px; margin-bottom: 2px; }
+        .f-text p { font-size: 12px; color: var(--text-muted); margin: 0; }
 
-        /* Mockup CSS */
-        .mockup-window { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow: hidden; transform: perspective(1000px) rotateY(-5deg); transition: 0.5s; }
-        .mockup-window:hover { transform: perspective(1000px) rotateY(0deg) translateY(-10px); }
-        .mockup-header { background: #f8fafc; padding: 12px 16px; border-bottom: 1px solid var(--border-soft); display: flex; gap: 6px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
-        .mockup-body { display: flex; height: 350px; background: var(--bg-app); }
-        .m-sidebar { width: 80px; background: white; border-right: 1px solid var(--border-soft); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-        .m-item { height: 16px; background: var(--bg-input); border-radius: 4px; }
-        .m-item.active { background: var(--primary-brand); opacity: 0.2; }
-        .m-content { flex: 1; padding: 24px; overflow: hidden; }
-        .m-card { background: white; border-radius: 8px; border: 1px solid var(--border-soft); margin-bottom: 12px; padding: 16px; }
-        .m-card.stats { height: 80px; display: flex; gap: 12px; }
-        .m-card.stats::before, .m-card.stats::after { content: ''; flex: 1; background: var(--bg-input); border-radius: 4px; }
-        .m-card.post { display: flex; gap: 12px; }
-        .m-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--border-focus); }
-        .m-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
-        .m-line { height: 8px; border-radius: 4px; background: var(--bg-input); }
-        .m-line.short { width: 40%; } .m-line.long { width: 100%; }
+        /* Sección Público Objetivo (B2B) */
+        .target-section { text-align: center; }
+        .section-tag { color: var(--primary-brand); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px; margin-bottom: 16px; display: block; }
+        .section-title { font-size: 40px; margin-bottom: 20px; }
+        .section-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 60px; }
+        
+        .target-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .target-card { background: white; padding: 40px 32px; border-radius: var(--radius-xl); border: 1px solid var(--border-soft); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: left; position: relative; overflow: hidden;}
+        .target-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: var(--border-focus); }
+        .target-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary-gradient); transform: scaleX(0); transform-origin: left; transition: 0.4s; }
+        .target-card:hover::before { transform: scaleX(1); }
+        
+        .target-icon { font-size: 36px; color: var(--primary-brand); margin-bottom: 24px; background: #eef2ff; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 20px;}
+        .target-card h3 { font-size: 24px; margin-bottom: 16px; }
+        .target-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 15px; color: var(--text-muted); }
+        .target-list i { color: var(--success); font-size: 18px; }
 
-        /* Secciones Generales */
-        .section-title { font-size: 36px; margin-bottom: 16px; letter-spacing: -1px; }
-        .section-title span { color: var(--danger); }
-        .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 60px; }
+        /* Features B2B Premium */
+        .feature-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 120px; }
+        .feature-split.reverse { direction: rtl; }
+        .feature-split.reverse > * { direction: ltr; }
+        .f-image-wrapper { position: relative; padding: 20px; border-radius: 30px; background: var(--bg-surface); border: 1px solid var(--border-soft); box-shadow: var(--shadow-md); }
+        .f-image-wrapper img { width: 100%; border-radius: 16px; }
+        .f-text-content h2 { font-size: 36px; margin-bottom: 24px; }
+        .f-text-content p { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
+        .stat-inline { display: flex; gap: 32px; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-soft); }
+        .stat-item h4 { font-size: 32px; color: var(--primary-brand); margin-bottom: 4px; }
+        .stat-item p { font-size: 13px; font-weight: 600; text-transform: uppercase; color: var(--text-light); }
 
-        /* Grid Problemas */
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-        .problem-card { background: white; padding: 40px 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border-soft); transition: 0.3s; text-align: left; }
-        .problem-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border-focus); }
-        .icon-danger { width: 56px; height: 56px; border-radius: 16px; background: #fee2e2; color: var(--danger); font-size: 28px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
-        .problem-card h3 { font-size: 20px; margin-bottom: 12px; }
-        .problem-card p { color: var(--text-muted); font-size: 14px; }
-
-        /* Split Features */
-        .split-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
-        .split-feature.reverse { direction: rtl; }
-        .split-feature.reverse > * { direction: ltr; }
-        .badge-feature { display: inline-block; color: var(--primary-brand); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 12px; margin-bottom: 16px; }
-        .feature-text h2 { font-size: 32px; margin-bottom: 20px; }
-        .feature-text p { color: var(--text-muted); margin-bottom: 32px; font-size: 16px; }
-        .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--primary-dark); font-weight: 500; }
-        .feature-list i { color: var(--success); font-size: 20px; }
-        .feature-visual { height: 400px; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); }
-        .bg-gradient-1 { background: linear-gradient(135deg, #c7d2fe 0%, #818cf8 100%); }
-        .bg-gradient-2 { background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%); }
-
-        /* Stats */
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 900px; margin: 60px auto 0; }
-        .stat-box h3 { font-size: 56px; color: white; margin-bottom: 8px; }
-        .stat-box p { color: var(--text-light); font-size: 16px; }
-
-        /* Pricing */
-        .pricing-card { max-width: 450px; margin: 0 auto; background: white; border-radius: var(--radius-xl); border: 2px solid var(--primary-brand); box-shadow: var(--shadow-lg); overflow: hidden; text-align: left; }
-        .pricing-header { background: #eef2ff; padding: 40px; border-bottom: 1px solid var(--border-focus); text-align: center; }
-        .pricing-header h3 { color: var(--primary-brand); margin-bottom: 12px; }
-        .price { font-size: 48px; font-weight: 800; color: var(--primary-dark); }
-        .price span { font-size: 16px; color: var(--text-muted); font-weight: 500; }
-        .pricing-body { padding: 40px; }
-        .pricing-body ul { margin-bottom: 32px; }
-        .pricing-body li { display: flex; gap: 12px; margin-bottom: 16px; color: var(--text-main); font-weight: 500; }
-        .pricing-body i { color: var(--primary-brand); font-size: 20px; }
+        /* Emoción / CTA Final */
+        .emotional-cta { text-align: center; padding: 100px 0; border-radius: 40px; background: var(--primary-dark); color: white; position: relative; overflow: hidden; }
+        .emotional-cta::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(79,70,229,0.3) 0%, rgba(15,23,42,0) 50%); }
+        .emotional-cta h2 { color: white; font-size: 48px; margin-bottom: 24px; position: relative; z-index: 1; }
+        .emotional-cta p { font-size: 20px; color: var(--text-light); max-width: 600px; margin: 0 auto 40px; position: relative; z-index: 1; }
+        .emotional-cta .btn { position: relative; z-index: 1; }
 
         /* Footer */
-        .footer { background: var(--bg-surface); border-top: 1px solid var(--border-soft); padding: 80px 0 20px; }
+        .footer { background: white; padding: 80px 0 24px; border-top: 1px solid var(--border-soft); }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-        .footer-brand p { color: var(--text-muted); margin-top: 16px; font-size: 14px; max-width: 300px; }
-        .footer-links h4 { margin-bottom: 20px; font-size: 16px; }
-        .footer-links a { display: block; color: var(--text-muted); margin-bottom: 12px; font-size: 14px; }
-        .footer-links a:hover { color: var(--primary-brand); }
-        .footer-bottom { border-top: 1px solid var(--border-soft); padding-top: 20px; color: var(--text-light); font-size: 13px; }
+        .footer-brand p { color: var(--text-muted); margin-top: 16px; font-size: 15px; max-width: 300px; }
+        .footer-links h4 { margin-bottom: 24px; font-size: 16px; color: var(--primary-dark); }
+        .footer-links a { display: block; color: var(--text-muted); margin-bottom: 12px; font-size: 15px; font-weight: 500; }
+        .footer-links a:hover { color: var(--primary-brand); transform: translateX(5px); }
+        .footer-bottom { border-top: 1px solid var(--border-soft); padding-top: 24px; color: var(--text-light); font-size: 14px; text-align: center; }
 
         /* Responsive */
         @media (max-width: 992px) {
-            .hero-container, .split-feature, .split-feature.reverse { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-            .nav-links { display: none; }
-            .hero h1 { font-size: 40px; }
+            .hero-container, .target-grid, .feature-split { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero h1 { font-size: 42px; }
             .hero p { margin: 0 auto 32px; }
-            .grid-3, .stats-grid { grid-template-columns: 1fr; }
-            .feature-list li { justify-content: center; }
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .hero-cta-buttons, .stat-inline { justify-content: center; }
+            .float-card { display: none; /* Ocultar en móvil para limpieza */ }
+            .nav-links { display: none; }
+            .emotional-cta h2 { font-size: 32px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .footer-brand p { margin: 16px auto 0; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="brand">
                 <i class='bx bx-layer'></i>
                 <span>ConectaEdu</span>
             </div>
             <div class="nav-links">
-                <a href="#problema">El Problema</a>
-                <a href="#solucion">Plataforma</a>
-                <a href="#beneficios">Beneficios</a>
+                <a href="#solucion">Por qué elegirnos</a>
+                <a href="#audiencia">Para quién es</a>
+                <a href="#impacto">Impacto</a>
             </div>
             <div class="nav-actions">
-                <button class="btn btn-outline btn-login"><i class='bx bxl-google'></i> Acceso Google</button>
-                <button class="btn btn-primary" onclick="window.location.href='#planes'">Agendar Demo</button>
+                <button class="btn btn-outline btn-login"><i class='bx bxl-google'></i> Ingreso Plataforma</button>
             </div>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="hero-bg-glow"></div>
-        <div class="hero-container">
-            <div class="hero-content animate__animated animate__fadeInUp">
-                <div class="badge-new">NUEVO Lote 2026 🚀</div>
-                <h1>Centraliza la comunicación educativa en un <span>solo lugar</span></h1>
-                <p>Deja atrás los infinitos grupos de WhatsApp y correos perdidos. ConectaEdu es el hub digital donde docentes, familias y estudiantes colaboran de forma segura y estructurada.</p>
-                <div class="hero-cta">
-                    <button class="btn btn-primary btn-large btn-login"><i class='bx bxl-google'></i> Iniciar Sesión con Google</button>
-                    <p class="cta-hint">✓ Sin tarjetas de crédito • ✓ Implementación en 24 hrs</p>
+        <div class="hero-blob"></div>
+        <div class="container hero-container">
+            
+            <div class="hero-content reveal">
+                <div class="badge-premium">
+                    <span>Tendencia EdTech 2026</span> Más de 50 colegios digitalizados
+                </div>
+                <h1>La red social educativa privada para <span>tu institución.</span></h1>
+                <p>Moderniza la comunicación escolar, elimina el caos de WhatsApp y fortalece el sentido de pertenencia en un solo ecosistema digital que estudiantes y docentes aman usar.</p>
+                
+                <div class="hero-cta-group">
+                    <div class="hero-cta-buttons">
+                        <button class="btn btn-primary btn-large btn-login"><i class='bx bxl-google'></i> Iniciar Ecosistema</button>
+                        <button class="btn btn-outline btn-large" onclick="window.location.href='#audiencia'">Ver beneficios</button>
+                    </div>
+                    <div class="cta-trust">
+                        <span><i class='bx bx-check-circle'></i> Sin contratos forzosos</span>
+                        <span><i class='bx bx-check-circle'></i> Configuración en 24h</span>
+                        <span><i class='bx bx-check-circle'></i> 100% Google Cloud</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="hero-visual animate__animated animate__fadeInRight animate__delay-1s">
-                <div class="mockup-window">
-                    <div class="mockup-header">
-                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <div class="hero-visual reveal delay-200">
+                <div class="float-card top">
+                    <div class="f-icon green"><i class='bx bx-trending-up'></i></div>
+                    <div class="f-text">
+                        <h4 class="counter" data-target="85">0</h4><h4>%</h4>
+                        <p>Aumento en participación</p>
                     </div>
-                    <div class="mockup-body">
-                        <div class="m-sidebar">
-                            <div class="m-item active"></div>
-                            <div class="m-item"></div>
-                            <div class="m-item"></div>
-                        </div>
-                        <div class="m-content">
-                            <div class="m-card stats"></div>
-                            <div class="m-card post">
-                                <div class="m-avatar"></div>
-                                <div class="m-lines">
-                                    <div class="m-line short"></div>
-                                    <div class="m-line long"></div>
-                                </div>
-                            </div>
-                            <div class="m-card post">
-                                <div class="m-avatar"></div>
-                                <div class="m-lines">
-                                    <div class="m-line short"></div>
-                                    <div class="m-line long"></div>
-                                </div>
+                </div>
+                
+                <div class="mockup-main">
+                    <div style="font-weight: 700; margin-bottom: 16px; color: var(--primary-dark); font-size: 18px; border-bottom: 1px solid var(--border-soft); padding-bottom: 12px;">Muro Institucional</div>
+                    
+                    <div class="m-post">
+                        <div class="m-post-header">
+                            <div class="m-avatar">M</div>
+                            <div class="m-line-group">
+                                <div class="m-line w-40" style="background: var(--text-main);"></div>
+                                <div class="m-line w-100" style="background: #eef2ff;"></div>
                             </div>
                         </div>
+                        <div class="m-line w-100"></div>
+                        <div class="m-line w-80"></div>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="font-size: 11px; background: #fee2e2; color: #ef4444; padding: 4px 10px; border-radius: 20px; font-weight: 600;">📢 Comunicado Oficial</span>
+                        </div>
+                    </div>
+
+                    <div class="m-post" style="opacity: 0.7;">
+                        <div class="m-post-header">
+                            <div class="m-avatar student">D</div>
+                            <div class="m-line-group">
+                                <div class="m-line w-40"></div>
+                                <div class="m-line w-80"></div>
+                            </div>
+                        </div>
+                        <div class="m-line w-100"></div>
+                    </div>
+                </div>
+
+                <div class="float-card bottom">
+                    <div class="f-icon indigo"><i class='bx bx-time-five'></i></div>
+                    <div class="f-text">
+                        <h4 class="counter" data-target="40">0</h4><h4>h</h4>
+                        <p>Ahorro admin. mensual</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="problema" class="section bg-light">
-        <div class="container text-center">
-            <h2 class="section-title">El sistema actual está <span>roto</span></h2>
-            <p class="section-subtitle">Las instituciones educativas pierden hasta un 30% de productividad gestionando comunicaciones fragmentadas.</p>
+    <section id="audiencia" class="section bg-white target-section">
+        <div class="container reveal">
+            <span class="section-tag">Ecosistema Integrado</span>
+            <h2 class="section-title">Una solución a la medida de tu comunidad</h2>
+            <p class="section-subtitle">Las plataformas tradicionales son ignoradas. ConectaEdu ofrece un valor real y una experiencia superior para cada rol de tu institución.</p>
             
-            <div class="grid-3">
-                <div class="problem-card">
-                    <div class="icon-danger"><i class='bx bxl-whatsapp'></i></div>
-                    <h3>Caos en WhatsApp</h3>
-                    <p>Grupos sin moderación, mensajes perdidos a las 10 PM y mezcla de vida personal con laboral.</p>
+            <div class="target-grid">
+                <div class="target-card reveal delay-100">
+                    <div class="target-icon"><i class='bx bx-building-house'></i></div>
+                    <h3>Directivos & Sostenedores</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Proyecta una imagen de colegio moderno e innovador mientras recuperas el control institucional.</p>
+                    <ul class="target-list">
+                        <li><i class='bx bx-check'></i> Centraliza comunicados oficiales</li>
+                        <li><i class='bx bx-check'></i> Protege la privacidad de datos</li>
+                        <li><i class='bx bx-check'></i> Aumenta la percepción de valor</li>
+                        <li><i class='bx bx-check'></i> Monitorea el clima escolar</li>
+                    </ul>
                 </div>
-                <div class="problem-card">
-                    <div class="icon-danger"><i class='bx bx-envelope'></i></div>
-                    <h3>Correos Ignorados</h3>
-                    <p>Circulares importantes que terminan en SPAM o que los apoderados simplemente no leen.</p>
+                
+                <div class="target-card reveal delay-200">
+                    <div class="target-icon"><i class='bx bx-chalkboard'></i></div>
+                    <h3>Equipo Docente</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Recupera tu tiempo personal. Despídete de responder WhatsApps a las 10 PM los domingos.</p>
+                    <ul class="target-list">
+                        <li><i class='bx bx-check'></i> Horarios de interacción definidos</li>
+                        <li><i class='bx bx-check'></i> Compartir recursos en un clic</li>
+                        <li><i class='bx bx-check'></i> Organización por asignaturas</li>
+                        <li><i class='bx bx-check'></i> Comunicación masiva instantánea</li>
+                    </ul>
                 </div>
-                <div class="problem-card">
-                    <div class="icon-danger"><i class='bx bx-disconnect'></i></div>
-                    <h3>Comunidad Desconectada</h3>
-                    <p>Falta de un ecosistema que una a toda la institución y fomente el sentido de pertenencia.</p>
+
+                <div class="target-card reveal delay-300">
+                    <div class="target-icon"><i class='bx bx-group'></i></div>
+                    <h3>Familias y Estudiantes</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Un espacio donde se sienten escuchados, informados y motivados a participar activamente.</p>
+                    <ul class="target-list">
+                        <li><i class='bx bx-check'></i> Interfaz intuitiva tipo red social</li>
+                        <li><i class='bx bx-check'></i> Cero correos perdidos en SPAM</li>
+                        <li><i class='bx bx-check'></i> Calendario claro de evaluaciones</li>
+                        <li><i class='bx bx-check'></i> Sentido de pertenencia real</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -289,81 +328,62 @@
 
     <section id="solucion" class="section">
         <div class="container">
-            <div class="split-feature">
-                <div class="feature-text">
-                    <div class="badge-feature">Panel Institucional</div>
-                    <h2>Todo tu colegio en un dashboard interactivo</h2>
-                    <p>Imagina tener un tablón digital inteligente donde puedes filtrar comunicados, publicar anuncios urgentes por curso y gestionar el calendario escolar con un par de clics.</p>
-                    <ul class="feature-list">
-                        <li><i class='bx bx-check-circle'></i> Muro segmentado por roles y cursos.</li>
-                        <li><i class='bx bx-check-circle'></i> Alertas de comunicados urgentes.</li>
-                        <li><i class='bx bx-check-circle'></i> Sistema de respuestas controladas.</li>
-                    </ul>
-                </div>
-                <div class="feature-visual bg-gradient-1">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5956/5956896.png" alt="Dashboard Abstract" style="width: 250px; opacity: 0.9; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));">
-                </div>
-            </div>
-
-            <div class="split-feature reverse">
-                <div class="feature-text">
-                    <div class="badge-feature">Calendario Académico</div>
-                    <h2>Planificación que todos entienden</h2>
-                    <p>Sincroniza evaluaciones, reuniones de apoderados y feriados oficiales. Mantén a toda la comunidad informada en tiempo real.</p>
-                    <ul class="feature-list">
-                        <li><i class='bx bx-check-circle'></i> Feriados chilenos integrados.</li>
-                        <li><i class='bx bx-check-circle'></i> Visibilidad según el rol del usuario.</li>
-                        <li><i class='bx bx-check-circle'></i> Creación rápida de eventos docentes.</li>
-                    </ul>
-                </div>
-                <div class="feature-visual bg-gradient-2">
-                    <i class='bx bx-calendar-star' style="font-size: 150px; color: white; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="beneficios" class="section bg-dark text-white">
-        <div class="container text-center">
-            <h2 class="section-title">Resultados tangibles para tu Institución</h2>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <h3>+85%</h3>
-                    <p>Lectura de comunicados</p>
-                </div>
-                <div class="stat-box">
-                    <h3>-40h</h3>
-                    <p>Ahorro administrativo mensual</p>
-                </div>
-                <div class="stat-box">
-                    <h3>100%</h3>
-                    <p>Privacidad de datos (Google)</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="planes" class="section bg-light">
-        <div class="container text-center">
-            <h2 class="section-title">Innova hoy mismo</h2>
-            <p class="section-subtitle">Comienza a usar la plataforma en minutos usando cuentas corporativas.</p>
             
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h3>Licencia Institucional</h3>
-                    <div class="price">EduPro <span>/ integral</span></div>
+            <div class="feature-split reveal">
+                <div class="f-text-content">
+                    <span class="section-tag">Comunicación Efectiva</span>
+                    <h2>Centraliza la información y recupera tu productividad.</h2>
+                    <p>Las instituciones educativas pierden miles de horas gestionando dudas repetitivas, correos que nadie lee y apoderados desinformados.</p>
+                    <p>Con nuestro <strong>Muro Institucional Interactivo</strong>, publicas una vez, y toda la comunidad es notificada en una interfaz que realmente saben y quieren usar.</p>
+                    
+                    <div class="stat-inline">
+                        <div class="stat-item">
+                            <h4>-30%</h4>
+                            <p>En reclamos por desinformación</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>100%</h4>
+                            <p>Trazabilidad de lecturas</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="pricing-body">
-                    <ul>
-                        <li><i class='bx bx-check'></i> Usuarios ilimitados</li>
-                        <li><i class='bx bx-check'></i> Autenticación segura Google Auth</li>
-                        <li><i class='bx bx-check'></i> Tablón segmentado por roles</li>
-                        <li><i class='bx bx-check'></i> Calendario institucional</li>
-                        <li><i class='bx bx-check'></i> Soporte prioritario</li>
-                    </ul>
-                    <button class="btn btn-primary btn-full btn-login"><i class='bx bx-rocket'></i> Iniciar Ecosistema</button>
+                <div class="f-image-wrapper reveal delay-200">
+                    <div style="background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%); padding: 60px; border-radius: 16px; text-align: center;">
+                        <i class='bx bx-message-square-dots' style="font-size: 100px; color: var(--primary-brand); filter: drop-shadow(0 20px 30px rgba(79,70,229,0.2));"></i>
+                    </div>
                 </div>
             </div>
+
+            <div class="feature-split reverse reveal" style="margin-top: 100px;">
+                <div class="f-text-content">
+                    <span class="section-tag">Comunidad Viva</span>
+                    <h2>Crea una cultura escolar moderna e involucrada.</h2>
+                    <p>Los LMS (Moodle, Canvas) son fríos y transaccionales: solo sirven para subir notas y tareas.</p>
+                    <p>ConectaEdu es un <strong>espacio social privado</strong>. Permite foros de discusión por curso, votaciones rápidas y celebración de hitos, transformando tu colegio en un ecosistema digital vibrante.</p>
+                    
+                    <ul class="target-list" style="margin-top: 24px;">
+                        <li><i class='bx bx-check-circle'></i> Fomenta la participación positiva</li>
+                        <li><i class='bx bx-check-circle'></i> Entorno seguro y moderado</li>
+                        <li><i class='bx bx-check-circle'></i> Formato que los alumnos entienden</li>
+                    </ul>
+                </div>
+                <div class="f-image-wrapper reveal delay-200">
+                    <div style="background: linear-gradient(135deg, #dcfce7 0%, #ccfbf1 100%); padding: 60px; border-radius: 16px; text-align: center;">
+                        <i class='bx bx-network-chart' style="font-size: 100px; color: var(--success); filter: drop-shadow(0 20px 30px rgba(16,185,129,0.2));"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="impacto" class="container reveal">
+        <div class="emotional-cta">
+            <h2>Más que un software, es el corazón digital de tu colegio.</h2>
+            <p>Únete a las instituciones líderes que ya dejaron atrás el caos comunicacional y están brindando una experiencia educativa del siglo XXI.</p>
+            <button class="btn btn-primary btn-large btn-login" style="margin-top: 20px; font-size: 18px; padding: 20px 50px;">
+                <i class='bx bxl-google'></i> Empieza tu transformación hoy
+            </button>
         </div>
     </section>
 
@@ -371,115 +391,148 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="brand"><i class='bx bx-layer'></i> ConectaEdu</div>
-                <p>Conectando la educación del futuro mediante tecnología intuitiva y segura.</p>
+                <p>La Red Social Educativa Privada. Innovando la forma en que los colegios se conectan, colaboran y crecen juntos.</p>
             </div>
             <div class="footer-links">
-                <h4>Producto</h4>
-                <a href="#">Características</a>
-                <a href="#">Seguridad</a>
+                <h4>Plataforma</h4>
+                <a href="#">Muro Institucional</a>
+                <a href="#">Calendario Sincronizado</a>
+                <a href="#">Seguridad y Privacidad</a>
+            </div>
+            <div class="footer-links">
+                <h4>Institucional</h4>
+                <a href="#">Agendar Demo B2B</a>
                 <a href="#">Casos de Éxito</a>
-            </div>
-            <div class="footer-links">
-                <h4>Soporte</h4>
-                <a href="#">Centro de Ayuda</a>
-                <a href="#">Documentación API</a>
-                <a href="#">Contacto</a>
+                <a href="#">Contacto Soporte</a>
             </div>
         </div>
-        <div class="footer-bottom text-center">
-            <p>&copy; 2026 ConectaEdu SaaS. Todos los derechos reservados.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ConectaEdu Cloud Software. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script type="module">
-        // Importaciones de Firebase directamente desde CDN
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-        // Configuración de tu proyecto Firebase (asegúrate de que los datos sean correctos)
+        // Configuración Firebase (Reemplazar con tus credenciales reales en producción)
         const firebaseConfig = {
             apiKey: "AIzaSyCOfNPxNcrxGBTQSjUXppN9GJnEQfcrDm4",
             authDomain: "foro-conectaedu.firebaseapp.com",
             projectId: "foro-conectaedu"
         };
 
-        // Inicialización
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // Forzar al usuario a seleccionar su cuenta de Google cada vez
-        provider.setCustomParameters({
-            prompt: 'select_account'
-        });
+        provider.setCustomParameters({ prompt: 'select_account' });
 
-        // DOM Logic
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. Sticky Navbar Effect
-            const navbar = document.querySelector('.navbar');
+            // 1. Interacciones UI: Navbar Glassmorphism
+            const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
             });
 
-            // 2. Lógica de Login en todos los botones
+            // 2. Scroll Reveal Animations (Intersection Observer)
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    
+                    // Disparar animación de números si la sección entra en vista
+                    if(entry.target.querySelector('.counter')) {
+                        runCounters(entry.target);
+                    }
+                    observer.unobserve(entry.target); // Ejecutar solo una vez
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => revealOnScroll.observe(reveal));
+
+            // Función para animar los números (+85%, -40h)
+            function runCounters(container) {
+                const counters = container.querySelectorAll('.counter');
+                const speed = 200; 
+
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+
+            // 3. Experiencia Premium de Login (B2B SaaS Style)
             const loginBtns = document.querySelectorAll('.btn-login');
             
             loginBtns.forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     e.preventDefault();
-                    const originalText = btn.innerHTML;
                     
-                    try {
-                        // Cambiar botón a estado de carga
-                        btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Conectando...";
-                        btn.style.pointerEvents = 'none';
+                    // Spinner Elegante de SweetAlert con efecto Glassmorphism
+                    Swal.fire({
+                        title: '<span style="color:var(--primary-dark); font-family:Poppins; font-weight:700;">Conectando...</span>',
+                        html: '<p style="color:var(--text-muted); font-family:Poppins;">Ingresando a tu comunidad educativa segura.</p>',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        background: 'rgba(255,255,255,0.9)',
+                        backdrop: `rgba(15, 23, 42, 0.4) backdrop-filter: blur(8px)`,
+                        didOpen: () => { Swal.showLoading(); }
+                    });
 
-                        // Ejecutar Popup de Google
+                    try {
+                        // Flujo de Auth
                         const result = await signInWithPopup(auth, provider);
                         const user = result.user;
 
-                        // Mostrar Toast de Éxito de SweetAlert2
+                        // Mensaje de éxito Premium
                         Swal.fire({
-                            toast: true,
-                            position: 'top-end',
                             icon: 'success',
-                            title: `¡Bienvenido, ${user.displayName}!`,
-                            text: 'Redirigiendo a tu plataforma...',
+                            title: '<span style="font-family:Poppins; font-weight:700;">¡Acceso Autorizado!</span>',
+                            text: `Bienvenido de vuelta, ${user.displayName.split(' ')[0]}.`,
                             showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true
+                            timer: 1500,
+                            background: 'white',
+                            backdrop: `rgba(15, 23, 42, 0.4) backdrop-filter: blur(8px)`
                         }).then(() => {
-                            // REDIRECCIÓN A TU APP PRINCIPAL
+                            // Redirección al Dashboard Principal (Index 15)
                             window.location.href = 'https://matiaspobletefuenzalida-hub.github.io/conectados/';
                         });
 
                     } catch (error) {
-                        console.error("Error en Auth:", error);
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error de inicio de sesión',
-                            text: error.message,
-                            confirmButtonColor: '#4f46e5'
+                            title: '<span style="font-family:Poppins; font-weight:700;">Error de Acceso</span>',
+                            text: 'No pudimos validar la identidad institucional. Intenta nuevamente.',
+                            confirmButtonColor: '#4f46e5',
+                            confirmButtonText: 'Reintentar',
+                            backdrop: `rgba(15, 23, 42, 0.4) backdrop-filter: blur(8px)`
                         });
-                    } finally {
-                        // Devolver el botón a la normalidad si hay error
-                        btn.innerHTML = originalText;
-                        btn.style.pointerEvents = 'auto';
                     }
                 });
             });
 
-            // 3. Verificación de Sesión Activa
+            // 4. Chequeo de sesión silencioso
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    console.log("Usuario ya autenticado:", user.email);
-                    // Opcional: Podrías descomentar la línea de abajo si quieres que los 
-                    // usuarios que ya iniciaron sesión anteriormente vayan directo al sistema al abrir la landing
+                    console.log("Sesión activa detectada.");
+                    // Opcional: Redirigir auto si ya está logueado
                     // window.location.href = 'https://matiaspobletefuenzalida-hub.github.io/conectados/';
                 }
             });
