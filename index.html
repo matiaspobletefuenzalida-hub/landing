@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConectaEdu Pro | Centraliza la Comunicación Escolar</title>
+    <meta name="description" content="La plataforma EdTech SaaS que conecta a directivos, docentes, estudiantes y apoderados en un solo ecosistema digital.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        /* ==========================================================================
+           STYLES - ConectaEdu Landing Page (SaaS Premium)
+           ========================================================================== */
+
+        /* Variables Base */
+        :root {
+            --bg-app: #f4f7fb; 
+            --bg-surface: #ffffff; 
+            --bg-input: #f8fafc;         
+            --primary-dark: #0f172a; 
+            --primary-brand: #4f46e5; 
+            --primary-brand-hover: #4338ca;
+            --text-main: #334155;          
+            --text-muted: #64748b; 
+            --text-light: #94a3b8;
+            --success: #10b981; 
+            --danger: #ef4444; 
+            --warning: #f59e0b;
+            --border-soft: #e2e8f0; 
+            --border-focus: #c7d2fe;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --radius-xl: 24px;
+            --radius-lg: 16px; 
+            --radius-md: 10px;
+            
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-main);
+            background-color: var(--bg-surface);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Tipografía Compartida */
+        h1, h2, h3, h4 { color: var(--primary-dark); font-weight: 700; line-height: 1.2; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        .text-center { text-align: center; }
+
+        /* Contenedores */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-app); }
+        .bg-dark { background-color: var(--primary-dark); }
+
+        /* Botones */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: var(--font-main); font-weight: 600; font-size: 14px;
+            padding: 12px 28px; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; border: none;
+        }
+        .btn-primary {
+            background: var(--primary-brand); color: white;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+        }
+        .btn-primary:hover { background: var(--primary-brand-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4); }
+        .btn-outline { background: white; border: 1px solid var(--border-soft); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--border-focus); background: var(--bg-input); }
+        .btn-large { padding: 16px 36px; font-size: 16px; }
+        .btn-full { width: 100%; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; transition: 0.3s; background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px); border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled { padding: 12px 0; border-bottom: 1px solid var(--border-soft); background: rgba(255, 255, 255, 0.95); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 800; color: var(--primary-dark); letter-spacing: -0.5px;}
+        .brand i { color: var(--primary-brand); font-size: 28px;}
+        .nav-links { display: flex; gap: 32px; font-weight: 500; font-size: 14px; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--primary-brand); }
+        .nav-actions { display: flex; gap: 12px; }
+
+        /* Hero Section */
+        .hero { position: relative; padding: 160px 0 100px; background: var(--bg-surface); overflow: hidden; }
+        .hero-bg-glow {
+            position: absolute; top: -100px; right: -100px; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: 0;
+        }
+        .hero-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        .badge-new { display: inline-block; background: #e0e7ff; color: var(--primary-brand); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 24px; letter-spacing: 1px; }
+        .hero h1 { font-size: 56px; margin-bottom: 24px; letter-spacing: -1.5px; }
+        .hero h1 span { color: var(--primary-brand); }
+        .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; max-width: 90%; }
+        .cta-hint { font-size: 13px !important; margin-top: 16px; color: var(--text-light) !important; font-weight: 500;}
+
+        /* Mockup CSS */
+        .mockup-window { background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow: hidden; transform: perspective(1000px) rotateY(-5deg); transition: 0.5s; }
+        .mockup-window:hover { transform: perspective(1000px) rotateY(0deg) translateY(-10px); }
+        .mockup-header { background: #f8fafc; padding: 12px 16px; border-bottom: 1px solid var(--border-soft); display: flex; gap: 6px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .mockup-body { display: flex; height: 350px; background: var(--bg-app); }
+        .m-sidebar { width: 80px; background: white; border-right: 1px solid var(--border-soft); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+        .m-item { height: 16px; background: var(--bg-input); border-radius: 4px; }
+        .m-item.active { background: var(--primary-brand); opacity: 0.2; }
+        .m-content { flex: 1; padding: 24px; overflow: hidden; }
+        .m-card { background: white; border-radius: 8px; border: 1px solid var(--border-soft); margin-bottom: 12px; padding: 16px; }
+        .m-card.stats { height: 80px; display: flex; gap: 12px; }
+        .m-card.stats::before, .m-card.stats::after { content: ''; flex: 1; background: var(--bg-input); border-radius: 4px; }
+        .m-card.post { display: flex; gap: 12px; }
+        .m-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--border-focus); }
+        .m-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+        .m-line { height: 8px; border-radius: 4px; background: var(--bg-input); }
+        .m-line.short { width: 40%; } .m-line.long { width: 100%; }
+
+        /* Secciones Generales */
+        .section-title { font-size: 36px; margin-bottom: 16px; letter-spacing: -1px; }
+        .section-title span { color: var(--danger); }
+        .section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 60px; }
+
+        /* Grid Problemas */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .problem-card { background: white; padding: 40px 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border-soft); transition: 0.3s; text-align: left; }
+        .problem-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border-focus); }
+        .icon-danger { width: 56px; height: 56px; border-radius: 16px; background: #fee2e2; color: var(--danger); font-size: 28px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+        .problem-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .problem-card p { color: var(--text-muted); font-size: 14px; }
+
+        /* Split Features */
+        .split-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
+        .split-feature.reverse { direction: rtl; }
+        .split-feature.reverse > * { direction: ltr; }
+        .badge-feature { display: inline-block; color: var(--primary-brand); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 12px; margin-bottom: 16px; }
+        .feature-text h2 { font-size: 32px; margin-bottom: 20px; }
+        .feature-text p { color: var(--text-muted); margin-bottom: 32px; font-size: 16px; }
+        .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--primary-dark); font-weight: 500; }
+        .feature-list i { color: var(--success); font-size: 20px; }
+        .feature-visual { height: 400px; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); }
+        .bg-gradient-1 { background: linear-gradient(135deg, #c7d2fe 0%, #818cf8 100%); }
+        .bg-gradient-2 { background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%); }
+
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 900px; margin: 60px auto 0; }
+        .stat-box h3 { font-size: 56px; color: white; margin-bottom: 8px; }
+        .stat-box p { color: var(--text-light); font-size: 16px; }
+
+        /* Pricing */
+        .pricing-card { max-width: 450px; margin: 0 auto; background: white; border-radius: var(--radius-xl); border: 2px solid var(--primary-brand); box-shadow: var(--shadow-lg); overflow: hidden; text-align: left; }
+        .pricing-header { background: #eef2ff; padding: 40px; border-bottom: 1px solid var(--border-focus); text-align: center; }
+        .pricing-header h3 { color: var(--primary-brand); margin-bottom: 12px; }
+        .price { font-size: 48px; font-weight: 800; color: var(--primary-dark); }
+        .price span { font-size: 16px; color: var(--text-muted); font-weight: 500; }
+        .pricing-body { padding: 40px; }
+        .pricing-body ul { margin-bottom: 32px; }
+        .pricing-body li { display: flex; gap: 12px; margin-bottom: 16px; color: var(--text-main); font-weight: 500; }
+        .pricing-body i { color: var(--primary-brand); font-size: 20px; }
+
+        /* Footer */
+        .footer { background: var(--bg-surface); border-top: 1px solid var(--border-soft); padding: 80px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand p { color: var(--text-muted); margin-top: 16px; font-size: 14px; max-width: 300px; }
+        .footer-links h4 { margin-bottom: 20px; font-size: 16px; }
+        .footer-links a { display: block; color: var(--text-muted); margin-bottom: 12px; font-size: 14px; }
+        .footer-links a:hover { color: var(--primary-brand); }
+        .footer-bottom { border-top: 1px solid var(--border-soft); padding-top: 20px; color: var(--text-light); font-size: 13px; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-container, .split-feature, .split-feature.reverse { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 40px; }
+            .hero p { margin: 0 auto 32px; }
+            .grid-3, .stats-grid { grid-template-columns: 1fr; }
+            .feature-list li { justify-content: center; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .footer-brand p { margin: 16px auto 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <i class='bx bx-layer'></i>
+                <span>ConectaEdu</span>
+            </div>
+            <div class="nav-links">
+                <a href="#problema">El Problema</a>
+                <a href="#solucion">Plataforma</a>
+                <a href="#beneficios">Beneficios</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-outline btn-login"><i class='bx bxl-google'></i> Acceso Google</button>
+                <button class="btn btn-primary" onclick="window.location.href='#planes'">Agendar Demo</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg-glow"></div>
+        <div class="hero-container">
+            <div class="hero-content animate__animated animate__fadeInUp">
+                <div class="badge-new">NUEVO Lote 2026 🚀</div>
+                <h1>Centraliza la comunicación educativa en un <span>solo lugar</span></h1>
+                <p>Deja atrás los infinitos grupos de WhatsApp y correos perdidos. ConectaEdu es el hub digital donde docentes, familias y estudiantes colaboran de forma segura y estructurada.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary btn-large btn-login"><i class='bx bxl-google'></i> Iniciar Sesión con Google</button>
+                    <p class="cta-hint">✓ Sin tarjetas de crédito • ✓ Implementación en 24 hrs</p>
+                </div>
+            </div>
+            
+            <div class="hero-visual animate__animated animate__fadeInRight animate__delay-1s">
+                <div class="mockup-window">
+                    <div class="mockup-header">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="m-sidebar">
+                            <div class="m-item active"></div>
+                            <div class="m-item"></div>
+                            <div class="m-item"></div>
+                        </div>
+                        <div class="m-content">
+                            <div class="m-card stats"></div>
+                            <div class="m-card post">
+                                <div class="m-avatar"></div>
+                                <div class="m-lines">
+                                    <div class="m-line short"></div>
+                                    <div class="m-line long"></div>
+                                </div>
+                            </div>
+                            <div class="m-card post">
+                                <div class="m-avatar"></div>
+                                <div class="m-lines">
+                                    <div class="m-line short"></div>
+                                    <div class="m-line long"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="problema" class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">El sistema actual está <span>roto</span></h2>
+            <p class="section-subtitle">Las instituciones educativas pierden hasta un 30% de productividad gestionando comunicaciones fragmentadas.</p>
+            
+            <div class="grid-3">
+                <div class="problem-card">
+                    <div class="icon-danger"><i class='bx bxl-whatsapp'></i></div>
+                    <h3>Caos en WhatsApp</h3>
+                    <p>Grupos sin moderación, mensajes perdidos a las 10 PM y mezcla de vida personal con laboral.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon-danger"><i class='bx bx-envelope'></i></div>
+                    <h3>Correos Ignorados</h3>
+                    <p>Circulares importantes que terminan en SPAM o que los apoderados simplemente no leen.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon-danger"><i class='bx bx-disconnect'></i></div>
+                    <h3>Comunidad Desconectada</h3>
+                    <p>Falta de un ecosistema que una a toda la institución y fomente el sentido de pertenencia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucion" class="section">
+        <div class="container">
+            <div class="split-feature">
+                <div class="feature-text">
+                    <div class="badge-feature">Panel Institucional</div>
+                    <h2>Todo tu colegio en un dashboard interactivo</h2>
+                    <p>Imagina tener un tablón digital inteligente donde puedes filtrar comunicados, publicar anuncios urgentes por curso y gestionar el calendario escolar con un par de clics.</p>
+                    <ul class="feature-list">
+                        <li><i class='bx bx-check-circle'></i> Muro segmentado por roles y cursos.</li>
+                        <li><i class='bx bx-check-circle'></i> Alertas de comunicados urgentes.</li>
+                        <li><i class='bx bx-check-circle'></i> Sistema de respuestas controladas.</li>
+                    </ul>
+                </div>
+                <div class="feature-visual bg-gradient-1">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5956/5956896.png" alt="Dashboard Abstract" style="width: 250px; opacity: 0.9; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));">
+                </div>
+            </div>
+
+            <div class="split-feature reverse">
+                <div class="feature-text">
+                    <div class="badge-feature">Calendario Académico</div>
+                    <h2>Planificación que todos entienden</h2>
+                    <p>Sincroniza evaluaciones, reuniones de apoderados y feriados oficiales. Mantén a toda la comunidad informada en tiempo real.</p>
+                    <ul class="feature-list">
+                        <li><i class='bx bx-check-circle'></i> Feriados chilenos integrados.</li>
+                        <li><i class='bx bx-check-circle'></i> Visibilidad según el rol del usuario.</li>
+                        <li><i class='bx bx-check-circle'></i> Creación rápida de eventos docentes.</li>
+                    </ul>
+                </div>
+                <div class="feature-visual bg-gradient-2">
+                    <i class='bx bx-calendar-star' style="font-size: 150px; color: white; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="section bg-dark text-white">
+        <div class="container text-center">
+            <h2 class="section-title">Resultados tangibles para tu Institución</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>+85%</h3>
+                    <p>Lectura de comunicados</p>
+                </div>
+                <div class="stat-box">
+                    <h3>-40h</h3>
+                    <p>Ahorro administrativo mensual</p>
+                </div>
+                <div class="stat-box">
+                    <h3>100%</h3>
+                    <p>Privacidad de datos (Google)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planes" class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title">Innova hoy mismo</h2>
+            <p class="section-subtitle">Comienza a usar la plataforma en minutos usando cuentas corporativas.</p>
+            
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Licencia Institucional</h3>
+                    <div class="price">EduPro <span>/ integral</span></div>
+                </div>
+                <div class="pricing-body">
+                    <ul>
+                        <li><i class='bx bx-check'></i> Usuarios ilimitados</li>
+                        <li><i class='bx bx-check'></i> Autenticación segura Google Auth</li>
+                        <li><i class='bx bx-check'></i> Tablón segmentado por roles</li>
+                        <li><i class='bx bx-check'></i> Calendario institucional</li>
+                        <li><i class='bx bx-check'></i> Soporte prioritario</li>
+                    </ul>
+                    <button class="btn btn-primary btn-full btn-login"><i class='bx bx-rocket'></i> Iniciar Ecosistema</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="brand"><i class='bx bx-layer'></i> ConectaEdu</div>
+                <p>Conectando la educación del futuro mediante tecnología intuitiva y segura.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Producto</h4>
+                <a href="#">Características</a>
+                <a href="#">Seguridad</a>
+                <a href="#">Casos de Éxito</a>
+            </div>
+            <div class="footer-links">
+                <h4>Soporte</h4>
+                <a href="#">Centro de Ayuda</a>
+                <a href="#">Documentación API</a>
+                <a href="#">Contacto</a>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 ConectaEdu SaaS. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Importaciones de Firebase directamente desde CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+        // Configuración de tu proyecto Firebase (asegúrate de que los datos sean correctos)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOfNPxNcrxGBTQSjUXppN9GJnEQfcrDm4",
+            authDomain: "foro-conectaedu.firebaseapp.com",
+            projectId: "foro-conectaedu"
+        };
+
+        // Inicialización
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Forzar al usuario a seleccionar su cuenta de Google cada vez
+        provider.setCustomParameters({
+            prompt: 'select_account'
+        });
+
+        // DOM Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Navbar Effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Lógica de Login en todos los botones
+            const loginBtns = document.querySelectorAll('.btn-login');
+            
+            loginBtns.forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const originalText = btn.innerHTML;
+                    
+                    try {
+                        // Cambiar botón a estado de carga
+                        btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Conectando...";
+                        btn.style.pointerEvents = 'none';
+
+                        // Ejecutar Popup de Google
+                        const result = await signInWithPopup(auth, provider);
+                        const user = result.user;
+
+                        // Mostrar Toast de Éxito de SweetAlert2
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: `¡Bienvenido, ${user.displayName}!`,
+                            text: 'Redirigiendo a tu plataforma...',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true
+                        }).then(() => {
+                            // REDIRECCIÓN A TU APP PRINCIPAL
+                            window.location.href = 'https://matiaspobletefuenzalida-hub.github.io/conectados/';
+                        });
+
+                    } catch (error) {
+                        console.error("Error en Auth:", error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error de inicio de sesión',
+                            text: error.message,
+                            confirmButtonColor: '#4f46e5'
+                        });
+                    } finally {
+                        // Devolver el botón a la normalidad si hay error
+                        btn.innerHTML = originalText;
+                        btn.style.pointerEvents = 'auto';
+                    }
+                });
+            });
+
+            // 3. Verificación de Sesión Activa
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    console.log("Usuario ya autenticado:", user.email);
+                    // Opcional: Podrías descomentar la línea de abajo si quieres que los 
+                    // usuarios que ya iniciaron sesión anteriormente vayan directo al sistema al abrir la landing
+                    // window.location.href = 'https://matiaspobletefuenzalida-hub.github.io/conectados/';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
